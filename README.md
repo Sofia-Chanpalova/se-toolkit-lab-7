@@ -91,3 +91,24 @@ By the end of this lab, you should be able to say:
 2. [Backend Integration](./lab/tasks/required/task-2.md) — P0: slash commands + real data
 3. [Intent-Based Natural Language Routing](./lab/tasks/required/task-3.md) — P1: LLM tool use
 4. [Containerize and Document](./lab/tasks/required/task-4.md) — P3: containerize + deploy
+
+## Deploy
+
+### Prerequisites
+- Docker and Docker Compose installed
+- Git repository cloned
+- Environment file `.env.docker.secret` configured
+
+### Environment Variables
+Create `.env.docker.secret` with the following variables:
+
+```bash
+# Backend configuration
+LMS_API_KEY=your-secret-api-key
+AUTOCHECKER_API_URL=https://auche.namaz.live
+AUTOCHECKER_API_LOGIN=your.email@innopolis.university
+AUTOCHECKER_API_PASSWORD=your-github-username/your-telegram-alias
+
+# Bot configuration
+BOT_TOKEN=your-telegram-bot-token-from-botfather
+QWEN_CODE_API_KEY=your-qwen-api-key
