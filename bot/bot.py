@@ -3,6 +3,7 @@ import argparse
 import asyncio
 import sys
 import os
+import inspect
 
 # Добавляем текущую директорию в путь
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -17,11 +18,12 @@ async def handle_command(command: str) -> str:
         return "No command provided"
     
     cmd = parts[0].lower()
-    args = parts[1:]
+    args = parts[1:] if len(parts) > 1 else []
     
     if cmd in COMMANDS:
         handler = COMMANDS[cmd]
-        if asyncio.iscoroutinefunction(handler):
+        # Проверяем, является ли функция корутиной
+        if inspect.iscoroutinefunction(handler):
             if args:
                 return await handler(*args)
             return await handler()
@@ -30,7 +32,7 @@ async def handle_command(command: str) -> str:
                 return handler(*args)
             return handler()
     else:
-        return f"Unknown command: {cmd}. Use /help for available commands."
+        return f"❌ Unknown command: {cmd}. Use /help for available commands."
 
 async def test_mode(command: str) -> None:
     """Run in test mode: execute command and print response."""
@@ -39,7 +41,7 @@ async def test_mode(command: str) -> None:
         print(response)
         sys.exit(0)
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"❌ Error: {e}")
         sys.exit(1)
 
 def main():
@@ -50,8 +52,9 @@ def main():
     if args.test:
         asyncio.run(test_mode(args.test))
     else:
-        print("Starting Telegram bot...")
-        print("Use --test flag for testing")
+        print("🤖 Starting Telegram bot...")
+        print("Use --test flag for testing commands")
+        print("Example: uv run bot.py --test '/health'")
         # TODO: Task 2 - Add Telegram bot integration
 
 if __name__ == "__main__":
