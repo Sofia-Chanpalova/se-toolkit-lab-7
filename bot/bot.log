@@ -1,0 +1,12 @@
+nohup: ignoring input
+Traceback (most recent call last):
+  File "/root/se-toolkit-lab-7/bot/bot.py", line 133, in <module>
+    main()
+    ~~~~^^
+  File "/root/se-toolkit-lab-7/bot/bot.py", line 130, in main
+    run_telegram_bot()
+    ~~~~~~~~~~~~~~~~^^
+  File "/root/se-toolkit-lab-7/bot/bot.py", line 117, in run_telegram_bot
+    app.add_handler(CallbackQueryHandler(telegram_callback))
+                    ^^^^^^^^^^^^^^^^^^^^
+NameError: name 'CallbackQueryHandler' is not defined
